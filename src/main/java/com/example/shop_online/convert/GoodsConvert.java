@@ -4,13 +4,12 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.example.shop_online.entity.Goods;
 import com.example.shop_online.vo.GoodsVO;
 import com.example.shop_online.vo.RecommendGoodsVO;
-import org.apache.ibatis.annotations.Mapper;
+import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import java.util.Arrays;
 import java.util.List;
-
 @Mapper
 public interface GoodsConvert {
     GoodsConvert INSTANCE = Mappers.getMapper(GoodsConvert.class);

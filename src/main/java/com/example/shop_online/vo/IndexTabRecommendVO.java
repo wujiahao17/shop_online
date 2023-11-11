@@ -6,10 +6,6 @@ import lombok.Data;
 
 import java.util.List;
 
-/**
- * author：H
- * Date：2023/11/11 14:57
- */
 @Data
 public class IndexTabRecommendVO {
     @Schema(description = "主键id")

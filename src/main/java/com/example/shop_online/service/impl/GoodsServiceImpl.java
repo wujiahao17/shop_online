@@ -1,17 +1,16 @@
 package com.example.shop_online.service.impl;
 
-
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.shop_online.common.exception.ServerException;
 import com.example.shop_online.common.result.PageResult;
 import com.example.shop_online.convert.GoodsConvert;
 import com.example.shop_online.entity.*;
 import com.example.shop_online.mapper.*;
 import com.example.shop_online.query.Query;
-import com.example.shop_online.query.RecommendByTabGoodsQuery;
 import com.example.shop_online.service.GoodsService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.shop_online.service.RecommendByTabGoodsQuery;
 import com.example.shop_online.vo.GoodsVO;
 import com.example.shop_online.vo.IndexTabGoodsVO;
 import com.example.shop_online.vo.IndexTabRecommendVO;
@@ -33,14 +32,13 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements GoodsService {
-    private final IndexRecommendMapper indexRecommendMapper;
-    private final IndexRecommendTabMapper indexRecommendTabMapper;
-    private final GoodsDetailMapper goodsDetailMapper;
-    private final GoodsSpecificationMapper goodsSpecificationMapper;
-    private final GoodsSpecificationDetailMapper goodsSpecificationDetailMapper;
+    private IndexRecommendMapper indexRecommendMapper;
+    private IndexRecommendTabMapper indexRecommendTabMapper;
+    private GoodsDetailMapper goodsDetailMapper;
+    private GoodsSpecificationMapper goodsSpecificationMapper;
+    private  GoodsSpecificationDetailMapper  goodsSpecificationDetailMapper;
     @Override
     public IndexTabRecommendVO getTabRecommendGoodsByTabId(RecommendByTabGoodsQuery query) {
-//        1、根据推荐的recommendId 查询实体
         IndexRecommend indexRecommend = indexRecommendMapper.selectById(query.getSubType());
         if (indexRecommend == null) {
             throw new ServerException("推荐分类不存在");
@@ -52,7 +50,6 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
         if (tabList.size() == 0) {
             throw new ServerException("该分类下不存在 tab 分类");
         }
-
 //        3、tab分类下的商品列表
         List<IndexTabGoodsVO> list = new ArrayList<>();
         for (IndexRecommendTab item : tabList) {
@@ -84,7 +81,6 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
         List<RecommendGoodsVO> result = GoodsConvert.INSTANCE.convertToRecommendGoodsVOList(goodsPage.getRecords());
         return new PageResult<>(page.getTotal(), query.getPageSize(), query.getPage(), page.getPages(), result);
     }
-
     @Override
     public GoodsVO getGoodsDetail(Integer id) {
         //     根据id 获取商品详情
@@ -108,5 +104,4 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
         goodsVO.setSimilarProducts(goodsVOList);
         return goodsVO;
     }
-
 }

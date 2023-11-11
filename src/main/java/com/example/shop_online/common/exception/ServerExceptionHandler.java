@@ -2,15 +2,15 @@ package com.example.shop_online.common.exception;
 
 import com.example.shop_online.common.result.Result;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.validation.BindException;
+
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-/**
- * author：wujiahao
- * Date：2023/11/8 10:48
- */
+//import java.net.BindException;
+
 @Slf4j
 @RestControllerAdvice
 public class ServerExceptionHandler {
@@ -53,3 +53,4 @@ public class ServerExceptionHandler {
         return Result.error(ErrorCode.INTERNAL_SERVER_ERROR);
     }
 }
+

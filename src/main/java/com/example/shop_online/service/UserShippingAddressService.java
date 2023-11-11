@@ -1,6 +1,5 @@
 package com.example.shop_online.service;
 
-import com.example.shop_online.convert.AddressConvert;
 import com.example.shop_online.entity.UserShippingAddress;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.shop_online.vo.AddressVO;
@@ -18,9 +17,12 @@ import java.util.List;
  */
 public interface UserShippingAddressService extends IService<UserShippingAddress> {
 
+//添加收货地址
     Integer saveShippingAddress(AddressVO addressVO);
-
+    //修改
     Integer editShippingAddress(AddressVO addressVO);
+    //获取
 
-//    List<UserShippingAddress> findAddress(Integer userId);
+ List<AddressVO> getList(Integer userId);
+
 }

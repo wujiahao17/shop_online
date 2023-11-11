@@ -3,7 +3,7 @@ package com.example.shop_online.convert;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.example.shop_online.entity.IndexRecommend;
 import com.example.shop_online.vo.IndexRecommendVO;
-import org.apache.ibatis.annotations.Mapper;
+import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 

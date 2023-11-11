@@ -35,7 +35,6 @@ public class CategoryController {
         List<Category> list = categoryService.getIndexCategoryList();
         return Result.ok(list);
     }
-
     @GetMapping("top")
     @Operation(summary = "tab分类页-商品分类")
     public Result<List<CategoryVO>> getList() {

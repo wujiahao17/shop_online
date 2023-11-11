@@ -16,11 +16,12 @@ import java.util.List;
  *  服务实现类
  * </p>
  *
- * @author whb
+ * @author wujiahao
  * @since 2023-11-09
  */
 @Service
 public class IndexRecommendServiceImpl extends ServiceImpl<IndexRecommendMapper, IndexRecommend> implements IndexRecommendService {
+
 
     @Override
     public List<IndexRecommendVO> getList() {

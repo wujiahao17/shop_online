@@ -6,12 +6,9 @@ import lombok.NoArgsConstructor;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import static com.example.shop_online.constant.APIConstant.APP_TOKEN_EXPIRE_TIME;
 
-/**
- * author：wujiahao
- * Date：2023/11/11 8:28
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

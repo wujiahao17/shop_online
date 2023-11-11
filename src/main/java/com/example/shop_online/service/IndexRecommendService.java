@@ -15,5 +15,10 @@ import java.util.List;
  * @since 2023-11-09
  */
 public interface IndexRecommendService extends IService<IndexRecommend> {
+    /**
+     * 首页-热门推荐
+     *
+     * @return
+     */
     List<IndexRecommendVO> getList();
 }

@@ -14,5 +14,11 @@ import java.util.List;
  * @since 2023-11-09
  */
 public interface IndexCarouselService extends IService<IndexCarousel> {
+
+    /**
+     * 首页-广告区域
+     *
+     * @return
+     */
     List<IndexCarousel> getList(Integer distributionSite);
 }

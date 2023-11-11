@@ -1,16 +1,12 @@
 package com.example.shop_online.common.handler;
-
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
+
 import com.example.shop_online.common.constant.Constant;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
-/**
- * author：wujiahao
- * Date：2023/11/8 11:02
- */
 @Component
 public class FieldMetaObjectHandler implements MetaObjectHandler {
 

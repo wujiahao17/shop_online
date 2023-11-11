@@ -6,10 +6,6 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * author：wujiahao
- * Date：2023/11/8 10:39
- */
 @Data
 public class PageResult<T> implements Serializable {
     private static final long serialVersionUID = 1L;

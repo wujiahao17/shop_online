@@ -60,7 +60,7 @@ public class User {
 
     @ApiModelProperty("性别(0-男，1-女)")
     @TableField("gender")
-    private Integer gender;
+    private Byte gender;
 
     @ApiModelProperty("职业")
     @TableField("profession")
@@ -85,7 +85,7 @@ public class User {
     @ApiModelProperty("逻辑删除(0-未删除，1-已删除)")
     @TableField("delete_flag")
     @TableLogic
-    private Integer deleteFlag;
+    private Byte deleteFlag;
 
     @ApiModelProperty("创建时间")
     @TableField(value = "create_time", fill = FieldFill.INSERT)
