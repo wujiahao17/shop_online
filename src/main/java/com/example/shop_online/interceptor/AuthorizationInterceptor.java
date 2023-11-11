@@ -1,8 +1,9 @@
 package com.example.shop_online.interceptor;
 
 import com.example.shop_online.common.exception.ServerException;
+import com.example.shop_online.common.utils.JWTUtils;
+import com.example.shop_online.constant.APIConstant;
 import com.example.shop_online.service.RedisService;
-import com.example.shop_online.utils.JWTUtils;
 import com.example.shop_online.vo.UserTokenVO;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,14 +22,14 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 //       从header中得到token
-        String authorization = request.getHeader(AUTHORIZATION);
+        String authorization = request.getHeader(APIConstant.AUTHORIZATION);
 
         if (authorization == null) {
             throw new ServerException("access denied");
         }
 
 //        如果token存在，需要验证token的真伪，如果 token 是真的，对 token 解析，获取用户id
-        Map map = JWTUtils.getClaims(JWT_SECRET, authorization);
+        Map map = JWTUtils.getClaims(APIConstant.JWT_SECRET, authorization);
 
         if (map == null) {
             throw new ServerException("access denied");
