@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author wujiahao
- * @since 2023-11-08
+ * @since 2023-11-09
  */
 public interface IndexCarouselMapper extends BaseMapper<IndexCarousel> {
 

@@ -7,6 +7,10 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
+/**
+ * author：wujiahao
+ * Date：2023/11/8 11:02
+ */
 @Component
 public class FieldMetaObjectHandler implements MetaObjectHandler {
 
@@ -17,7 +21,7 @@ public class FieldMetaObjectHandler implements MetaObjectHandler {
 //        更新时间
         strictInsertFill(metaObject, Constant.UPDATE_TIME, LocalDateTime.class, LocalDateTime.now());
 //        逻辑删除
-        strictInsertFill(metaObject, Constant.DELETED_FLAG, Integer.class, 0);
+        strictInsertFill(metaObject, Constant.DELETE_FLAG, Integer.class, 0);
     }
 
     @Override

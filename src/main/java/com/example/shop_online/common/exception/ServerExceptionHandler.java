@@ -7,6 +7,10 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+/**
+ * author：wujiahao
+ * Date：2023/11/8 10:48
+ */
 @Slf4j
 @RestControllerAdvice
 public class ServerExceptionHandler {

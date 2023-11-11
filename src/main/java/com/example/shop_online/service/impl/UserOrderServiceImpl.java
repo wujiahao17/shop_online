@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
  *  服务实现类
  * </p>
  *
- * @author wujiahao
- * @since 2023-11-08
+ * @author whb
+ * @since 2023-11-09
  */
 @Service
 public class UserOrderServiceImpl extends ServiceImpl<UserOrderMapper, UserOrder> implements UserOrderService {

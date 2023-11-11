@@ -11,6 +11,10 @@ import com.baomidou.mybatisplus.generator.fill.Column;
 import java.io.File;
 import java.util.*;
 
+/**
+ * author：wujiahao
+ * Date：2023/11/8 10:50
+ */
 public class MybatisGen {
 
     public static void main(String[] args) {

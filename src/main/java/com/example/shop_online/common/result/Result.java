@@ -4,6 +4,10 @@ import com.example.shop_online.common.exception.ErrorCode;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
+/**
+ * author：wujiahao
+ * Date：2023/11/8 10:40
+ */
 @Data
 @Schema(description = "响应数据")
 public class Result<T> {
@@ -20,18 +24,15 @@ public class Result<T> {
         return ok(null);
     }
 
-
     public static <T> Result<T> ok(T data) {
         Result<T> result = new Result<>();
         result.setResult(data);
         return result;
     }
 
-
     public static <T> Result<T> error() {
         return error(ErrorCode.INTERNAL_SERVER_ERROR);
     }
-
 
     public static <T> Result<T> error(String msg) {
         return error(ErrorCode.INTERNAL_SERVER_ERROR.getCode(), msg);
@@ -40,7 +41,6 @@ public class Result<T> {
     public static <T> Result<T> error(ErrorCode errorCode) {
         return error(errorCode.getCode(), errorCode.getMsg());
     }
-
 
     public static <T> Result<T> error(int code, String msg) {
         Result<T> result = new Result<>();
