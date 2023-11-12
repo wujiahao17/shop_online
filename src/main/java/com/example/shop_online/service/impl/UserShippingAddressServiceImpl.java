@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.shop_online.vo.AddressVO;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -59,16 +60,23 @@ public class UserShippingAddressServiceImpl extends ServiceImpl<UserShippingAddr
     @Override
     public List<AddressVO> getList(Integer userId) {
         LambdaQueryWrapper<UserShippingAddress> queryWrapper =new LambdaQueryWrapper<>();
-        queryWrapper.eq(UserShippingAddress::getIsDefault,userId);
-        queryWrapper.orderByDesc(UserShippingAddress::getIsDefault);
         List<UserShippingAddress> list = baseMapper.selectList(queryWrapper);
         List<AddressVO> addressVOS = AddressConvert.INSTANCE.convertToAddressVOList(list);
         return addressVOS;
+    }
 
-//
-//        List<UserShippingAddress> list = baseMapper.selectList(new LambdaQueryWrapper<UserShippingAddress>()
-//                .eq(UserShippingAddress::getIsDefault, AddressDefaultEnum.DEFAULT_ADDRESS.getValue()));
-//        List<AddressVO> convert = AddressConvert.INSTANCE.convertToAddressVOList(list);
-//        return convert;
+    @Override
+    public String deleteShippingAddress(Integer deleteId) {
+        if(baseMapper.deleteById(deleteId) == 0){
+            return "删除失败";
+        }
+        return "删除成功";
+    }
+
+    @Override
+    public AddressVO selectShippingAddress(Integer selectId) {
+        UserShippingAddress userShippingAddress = baseMapper.selectById(selectId);
+        AddressVO addressVO = AddressConvert.INSTANCE.convertToAddressVO(userShippingAddress);
+        return addressVO;
     }
 }

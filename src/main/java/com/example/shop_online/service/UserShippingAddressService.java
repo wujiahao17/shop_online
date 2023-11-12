@@ -23,6 +23,10 @@ public interface UserShippingAddressService extends IService<UserShippingAddress
     Integer editShippingAddress(AddressVO addressVO);
     //获取
 
- List<AddressVO> getList(Integer userId);
+    List<AddressVO> getList(Integer userId);
+
+    String deleteShippingAddress(Integer deleteId);
+
+    AddressVO selectShippingAddress(Integer selectId);
 
 }

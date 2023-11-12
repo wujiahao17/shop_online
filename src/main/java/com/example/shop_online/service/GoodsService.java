@@ -4,6 +4,7 @@ import com.example.shop_online.common.result.PageResult;
 import com.example.shop_online.entity.Goods;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.shop_online.query.Query;
+import com.example.shop_online.query.RecommendByTabGoodsQuery;
 import com.example.shop_online.vo.GoodsVO;
 import com.example.shop_online.vo.IndexTabRecommendVO;
 import com.example.shop_online.vo.RecommendGoodsVO;
