@@ -60,7 +60,7 @@ public class UserShippingAddressServiceImpl extends ServiceImpl<UserShippingAddr
     @Override
     public List<AddressVO> getList(Integer userId) {
         LambdaQueryWrapper<UserShippingAddress> queryWrapper =new LambdaQueryWrapper<>();
-        List<UserShippingAddress> list = baseMapper.selectList(queryWrapper);
+        List<UserShippingAddress> list = baseMapper.selectList(queryWrapper.eq(UserShippingAddress::getUserId,userId));
         List<AddressVO> addressVOS = AddressConvert.INSTANCE.convertToAddressVOList(list);
         return addressVOS;
     }
