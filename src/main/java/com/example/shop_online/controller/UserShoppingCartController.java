@@ -75,6 +75,4 @@ public class UserShoppingCartController {
         return Result.ok();
     }
 
-
-
 }

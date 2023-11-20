@@ -2,7 +2,6 @@ package com.example.shop_online.controller;
 
 import com.example.shop_online.common.exception.ServerException;
 import com.example.shop_online.common.result.Result;
-import com.example.shop_online.entity.User;
 import com.example.shop_online.service.UserShippingAddressService;
 import com.example.shop_online.vo.AddressVO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,7 +20,7 @@ import static com.example.shop_online.common.utils.ObtainUserIdUtils.getUserId;
  *  前端控制器
  * </p>
  *
- * @author wujiahao
+ * @author wyh
  * @since 2023-11-09
  */
 @Tag(name = "地址管理")
@@ -52,28 +51,28 @@ public class UserShippingAddressController {
 
     @Operation(summary = "收货地址列表")
     @GetMapping("address")
-    public Result<List<AddressVO>> getAddressList(HttpServletRequest request) {
+    public Result<List<AddressVO>> getList(HttpServletRequest request) {
         Integer userId = getUserId(request);
         List<AddressVO> list = userShippingAddressService.getList(userId);
         return Result.ok(list);
-    }
 
-    @Operation(summary = "删除收获地址")
-    @DeleteMapping ("address")
-    public Result<String> deleteAddress(Integer deleteId,HttpServletRequest request) {
-        if (userShippingAddressService.deleteShippingAddress(deleteId).equals("删除成功")){
-            return Result.ok("删除成功");
-        }
-        return Result.error("删除失败");
     }
-
-    @Operation(summary = "收获地址详情")
-    @GetMapping ("address/detail")
-    public Result<AddressVO> selectAddress(Integer addressId,HttpServletRequest request) {
-        AddressVO addressVO = userShippingAddressService.selectShippingAddress(addressId);
-        if(addressVO == null) {
-            return Result.error("目标地址ID不存在");
+    @Operation(summary = "收货地址详情")
+    @GetMapping("address/detail")
+    public Result<AddressVO> getAddressDetail(@RequestParam Integer id, HttpServletRequest request) {
+        if (id == null) {
+            throw new ServerException("请求参数不能为空");
         }
-        return Result.ok(addressVO);
+        AddressVO addressInfo = userShippingAddressService.getAddressInfo(id);
+        return Result.ok(addressInfo);
+    }
+    @Operation(summary = "删除收货地址")
+    @DeleteMapping("address")
+    public Result removeAddress(@RequestParam Integer id, HttpServletRequest request) {
+        if (id == null) {
+            throw new ServerException("请求参数不能为空");
+        }
+        userShippingAddressService.removeShippingAddress(id);
+        return Result.ok();
     }
 }
