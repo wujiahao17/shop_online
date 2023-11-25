@@ -1,8 +1,9 @@
 package com.example.shop_online.convert;
 
+
 import com.example.shop_online.entity.UserShippingAddress;
 import com.example.shop_online.vo.UserAddressVO;
-import org.apache.ibatis.annotations.Mapper;
+import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;

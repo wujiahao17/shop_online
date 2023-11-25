@@ -11,4 +11,6 @@ public interface UserOrderDetailConvert {
     UserOrderDetailConvert INSTANCE = Mappers.getMapper(UserOrderDetailConvert.class);
 
     OrderDetailVO convertToOrderDetailVO(UserOrder userOrder);
+
+    OrderDetailVO convertToDetailVO(UserOrder userOrder);
 }
