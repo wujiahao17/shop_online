@@ -5,7 +5,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.shop_online.query.OrderPreQuery;
 import com.example.shop_online.vo.OrderDetailVO;
 import com.example.shop_online.vo.SubmitOrderVO;
+import com.example.shop_online.vo.UserOrderGoodsVO;
 import com.example.shop_online.vo.UserOrderVO;
+import io.lettuce.core.dynamic.annotation.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -25,4 +29,7 @@ public interface UserOrderService extends IService<UserOrder> {
     SubmitOrderVO getPreOrderDetail(Integer userId);
 
     SubmitOrderVO getPreNowOrderDetail(OrderPreQuery query);
+
+    SubmitOrderVO getRepurchaseOrderDetail(Integer id);
+
 }
