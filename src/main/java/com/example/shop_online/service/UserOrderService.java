@@ -42,6 +42,10 @@ public interface UserOrderService extends IService<UserOrder> {
     //删除订单
     void deleteOrder(List<Integer> ids,Integer userId);
 
+    //模拟支付
     void payOrder(Integer id);
+
+    //模拟发货
+    void consignOrder(Integer id);
 
 }
