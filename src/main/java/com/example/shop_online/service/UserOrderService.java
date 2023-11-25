@@ -3,6 +3,7 @@ package com.example.shop_online.service;
 import com.example.shop_online.entity.UserOrder;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.shop_online.vo.OrderDetailVO;
+import com.example.shop_online.vo.SubmitOrderVO;
 import com.example.shop_online.vo.UserOrderVO;
 
 /**
@@ -19,4 +20,6 @@ public interface UserOrderService extends IService<UserOrder> {
 
     //订单详情
     OrderDetailVO getOrderDetail(Integer id);
+
+    SubmitOrderVO getPreOrderDetail(Integer userId);
 }
