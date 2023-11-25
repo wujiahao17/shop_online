@@ -6,10 +6,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.shop_online.query.CancelGoodsQuery;
 import com.example.shop_online.query.OrderPreQuery;
 import com.example.shop_online.query.OrderQuery;
-import com.example.shop_online.vo.OrderDetailVO;
-import com.example.shop_online.vo.SubmitOrderVO;
-import com.example.shop_online.vo.UserOrderGoodsVO;
-import com.example.shop_online.vo.UserOrderVO;
+import com.example.shop_online.vo.*;
 import io.lettuce.core.dynamic.annotation.Param;
 
 import java.util.List;
@@ -47,5 +44,9 @@ public interface UserOrderService extends IService<UserOrder> {
 
     //模拟发货
     void consignOrder(Integer id);
+    //确认收货
+    OrderDetailVO receiptOrder(Integer id);
+    //获取订单物流信息
+    OrderLogisticVO getOrderLogistics(Integer id);
 
 }
