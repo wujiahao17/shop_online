@@ -1,16 +1,22 @@
 package com.example.shop_online.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.example.shop_online.common.exception.ServerException;
+import com.example.shop_online.convert.UserOrderDetailConvert;
 import com.example.shop_online.entity.Goods;
 import com.example.shop_online.entity.UserOrder;
 import com.example.shop_online.entity.UserOrderGoods;
+import com.example.shop_online.entity.UserShippingAddress;
 import com.example.shop_online.enums.OrderStatusEnum;
 import com.example.shop_online.mapper.GoodsMapper;
+import com.example.shop_online.mapper.UserOrderGoodsMapper;
 import com.example.shop_online.mapper.UserOrderMapper;
+import com.example.shop_online.mapper.UserShippingAddressMapper;
 import com.example.shop_online.query.OrderGoodsQuery;
 import com.example.shop_online.service.UserOrderGoodsService;
 import com.example.shop_online.service.UserOrderService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.shop_online.vo.OrderDetailVO;
 import com.example.shop_online.vo.UserOrderVO;
 import io.lettuce.core.StrAlgoArgs;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +25,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -103,8 +111,48 @@ public class UserOrderServiceImpl extends ServiceImpl<UserOrderMapper, UserOrder
         return userOrder.getId();
     }
 
+    @Override
+    public OrderDetailVO getOrderDetail(Integer id) {
+//        1.订单信息
+        UserOrder userOrder = baseMapper.selectById(id);
+        if(userOrder == null) {
+            throw new ServerException("订单信息不存在");
+        }
+        OrderDetailVO orderDetailVO = UserOrderDetailConvert.INSTANCE.convertToOrderDetailVO(userOrder);
+        orderDetailVO.setTotalMoney(userOrder.getTotalPrice());
+
+        //2.收货人信息
+        UserShippingAddress userShippingAddress = userShippingAddressMapper.selectById(userOrder.getAddressId());
+        if(userShippingAddress == null) {
+            throw new ServerException("收获地址信息不存在");
+        }
+        orderDetailVO.setReceiverContact(userShippingAddress.getReceiver());
+        orderDetailVO.setReceiverMobile(userShippingAddress.getContact());
+        orderDetailVO.setReceiverAddress(userShippingAddress.getAddress());
+
+        //3.商品集合
+        List<UserOrderGoods> list = userOrderGoodsMapper.selectList(new LambdaQueryWrapper<UserOrderGoods>().eq(UserOrderGoods::getOrderId,id));
+
+        orderDetailVO.setSkus(list);
+        //订单截止订单创建30分钟之后
+        orderDetailVO.setPayLatestTime(userOrder.getCreateTime().plusMinutes(30));
+
+        if(orderDetailVO.getPayLatestTime().isAfter(LocalDateTime.now())){
+            Duration duration = Duration.between(LocalDateTime.now(),orderDetailVO.getPayLatestTime());
+            //倒计时秒数
+            orderDetailVO.setCountdown(duration.toMillisPart());
+        }
+        return orderDetailVO;
+    }
+
     @Autowired
     private GoodsMapper goodsMapper;
+
+    @Autowired
+    private UserShippingAddressMapper userShippingAddressMapper;
+
+    @Autowired
+    private UserOrderGoodsMapper userOrderGoodsMapper;
 
     @Autowired
     private UserOrderGoodsService userOrderGoodsService;
