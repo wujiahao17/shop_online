@@ -18,6 +18,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static com.example.shop_online.common.utils.ObtainUserIdUtils.getUserId;
 
 /**
@@ -97,5 +99,22 @@ public class UserOrderController {
         return Result.ok(orderDetailVO);
     }
 
+    @Operation(summary = "删除订单")
+    @DeleteMapping("delete")
+    public Result deleteOrder(@RequestBody List<Integer> ids, HttpServletRequest request) {
+        Integer userId = getUserId(request);
+        userOrderService.deleteOrder(ids,userId);
+        return Result.ok();
+    }
+
+    @Operation(summary = "支付订单")
+    @GetMapping("pay")
+    public Result payOrder(@RequestParam Integer id) {
+        if (id == null) {
+            throw new ServerException("订单不存在");
+        }
+        userOrderService.payOrder(id);
+        return Result.ok();
+    }
 
 }
